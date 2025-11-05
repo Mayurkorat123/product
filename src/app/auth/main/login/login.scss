@@ -1,0 +1,25 @@
+.login-container {
+  display: flex;
+  justify-content: start;
+  // align-items: center;
+
+  .login-bg-image {
+    flex: 1;
+  }
+
+  .login-form {
+    flex: 1 ;
+    .form {
+      .form-field {
+        .field-lable {
+        }
+
+        .field-input {
+        }
+      }
+
+      .form-submit-button {
+      }
+    }
+  }
+}
