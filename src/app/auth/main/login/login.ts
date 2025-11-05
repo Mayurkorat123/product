@@ -1,28 +1,35 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { afterNextRender } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
-  styleUrl: './login.scss',
+  styleUrls: ['./login.scss'],
   standalone: false,
 })
-export class Login {
-  loginData!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.loginData = this.fb.group({
-      emain: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+export class Login implements OnInit {
+  formLogin!: FormGroup;
+  constructor(private fb: FormBuilder, @Inject(PLATFORM_ID) private platformId: Object) {
+    afterNextRender(() => {
+      if (isPlatformBrowser(this.platformId)) {
+        const input = document.querySelector('input[type="email"]') as HTMLInputElement;
+        if (input) input.focus();
+        console.log('📌 Browser hydrated: focused email input.');
+      }
     });
   }
 
-  submit(): void {
-    if (this.loginData.invalid) {
-      this.loginData.markAllAsTouched();
-      return;
-    }
+  ngOnInit(): void {
+    console.log('✅ SSR + CSR safe initialization');
+    this.formLogin = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  submit() {
+    console.log('Form Submitted:', this.formLogin.value);
   }
 }
