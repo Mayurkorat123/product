@@ -37,6 +37,7 @@
               }
             ],
             "styles": [
+              "node_modules/ng-zorro-antd/ng-zorro-antd.css",
               "src/scss/styles.scss"
             ]
           },
@@ -107,6 +108,7 @@
                 }
               ],
               "styles": [
+                "node_modules/ng-zorro-antd/ng-zorro-antd.css",
                 "src/scss/styles.scss"
               ],
               "ssr": false,
@@ -154,6 +156,7 @@
               }
             ],
             "styles": [
+              "node_modules/ng-zorro-antd/ng-zorro-antd.css",
               "src/scss/styles.scss"
             ]
           }
